@@ -12,14 +12,13 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const app = express();
-const port = 5000 || process.env.PORT;
+const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
 app.post("/", async (req, res) => {
   try {
     const prompt = req.body.prompt;
-    console.log(prompt);
 
     const response = await openai.createCompletion({
       model: "text-davinci-003",
@@ -40,4 +39,4 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Servr is runing on port ${port}`));
+app.listen(port, () => console.log(`Server is runing on port ${port}`));
